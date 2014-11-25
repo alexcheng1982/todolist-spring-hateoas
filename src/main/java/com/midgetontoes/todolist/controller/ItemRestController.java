@@ -35,7 +35,7 @@ public class ItemRestController {
         return new ItemResource(itemRepository.findOne(itemId));
     }
 
-    @RequestMapping(value = "/{itemId}/mark-as-completed", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{itemId}/markAsCompleted", method = RequestMethod.PUT)
     public Item markAsCompleted(@PathVariable Long listId, @PathVariable Long itemId) {
         Item item = itemRepository.findOne(itemId);
         if (item != null) {
@@ -45,7 +45,7 @@ public class ItemRestController {
         return item;
     }
 
-    @RequestMapping(value = "/{itemId}/mark-as-uncompleted", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{itemId}/markAsUncompleted", method = RequestMethod.PUT)
     public Item markAsUncompleted(@PathVariable Long listId, @PathVariable Long itemId) {
         Item item = itemRepository.findOne(itemId);
         if (item != null) {
