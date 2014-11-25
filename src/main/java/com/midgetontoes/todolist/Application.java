@@ -22,7 +22,7 @@ import java.util.Arrays;
 @EnableAutoConfiguration
 public class Application {
 
-    //@Bean
+    @Bean
     CommandLineRunner init(UserRepository userRepository, ListRepository listRepository, ItemRepository itemRepository) {
         return (evt) -> Arrays.asList("alex", "bob", "david")
                 .forEach(username -> {
