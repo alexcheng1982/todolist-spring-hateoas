@@ -25,7 +25,7 @@ public class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdap
     public UserDetailsService userDetailsService() {
         return (username) -> userRepository.findByUsername(username)
                 .map(user -> new User(user.getUsername(), user.getPassword(), true, true, true, true,
-                        AuthorityUtils.createAuthorityList("USER", "write")))
+                        AuthorityUtils.createAuthorityList("ROLE_USER")))
                 .orElseThrow(() -> new UsernameNotFoundException(username));
     }
 }
