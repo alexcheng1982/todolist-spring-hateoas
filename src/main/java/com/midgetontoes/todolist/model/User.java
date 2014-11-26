@@ -2,6 +2,7 @@ package com.midgetontoes.todolist.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.HashSet;
@@ -9,6 +10,8 @@ import java.util.Set;
 
 @Entity
 public class User extends AbstractEntity {
+
+    @Column(unique = true)
     private String username;
 
     @JsonIgnore
