@@ -21,15 +21,12 @@ import java.util.stream.Collectors;
 public class ListRestController {
 
     @Autowired
-    private  ListRepository listRepository;
-
-    @Autowired
     private ListService listService;
 
     @RequestMapping(method = RequestMethod.GET)
     public Resources<ListResource> readLists(Principal principal) {
         String username = principal.getName();
-        java.util.List<ListResource> lists = listRepository.findByUserUsername(username)
+        java.util.List<ListResource> lists = listService.findByUserUsername(username)
                 .stream()
                 .map(ListResource::new)
                 .collect(Collectors.toList());

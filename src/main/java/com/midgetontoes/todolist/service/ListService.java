@@ -5,6 +5,8 @@ import com.midgetontoes.todolist.model.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+
 @Component
 public class ListService {
     @Autowired
@@ -12,5 +14,9 @@ public class ListService {
 
     public List findOne(Long id) {
         return listRepository.findOne(id);
+    }
+
+    public Collection<List> findByUserUsername(String username) {
+        return listRepository.findByUserUsername(username);
     }
 }
