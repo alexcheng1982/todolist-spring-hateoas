@@ -3,6 +3,7 @@ package com.midgetontoes.todolist.controller;
 import com.midgetontoes.todolist.jpa.ListRepository;
 import com.midgetontoes.todolist.model.List;
 import com.midgetontoes.todolist.resource.ListResource;
+import com.midgetontoes.todolist.resource.ListResourceAssembler;
 import com.midgetontoes.todolist.service.ListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resources;
@@ -26,15 +27,16 @@ public class ListRestController {
     @RequestMapping(method = RequestMethod.GET)
     public Resources<ListResource> readLists(Principal principal) {
         String username = principal.getName();
+        ListResourceAssembler listResourceAssembler = new ListResourceAssembler();
         java.util.List<ListResource> lists = listService.findByUserUsername(username)
                 .stream()
-                .map(ListResource::new)
+                .map(listResourceAssembler::toResource)
                 .collect(Collectors.toList());
         return new Resources<ListResource>(lists);
     }
 
     @RequestMapping(value = "/{listId}", method = RequestMethod.GET)
     public ListResource readList(@PathVariable Long listId) {
-        return new ListResource(listService.findOne(listId));
+        return new ListResourceAssembler().toResource(listService.findOne(listId));
     }
 }

@@ -8,12 +8,11 @@ import org.springframework.hateoas.ResourceSupport;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 public class ListResource extends ResourceSupport {
-    private final List list;
+    private List list;
 
     public ListResource(List list) {
         this.list = list;
         Long listId = list.getId();
-        add(linkTo(methodOn(ListRestController.class, listId).readList(listId)).withSelfRel());
         add(linkTo(methodOn(ItemRestController.class, listId).readItems(listId)).withRel("items"));
     }
 
