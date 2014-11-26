@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,8 +23,8 @@ public class ListRestController {
     private  ListRepository listRepository;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Resources<ListResource> readLists() {
-        String username = "alex";
+    public Resources<ListResource> readLists(Principal principal) {
+        String username = principal.getName();
         java.util.List<ListResource> lists = listRepository.findByUserUsername(username)
                 .stream()
                 .map(ListResource::new)
