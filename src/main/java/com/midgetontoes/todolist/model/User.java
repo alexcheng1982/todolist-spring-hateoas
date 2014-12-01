@@ -1,6 +1,7 @@
 package com.midgetontoes.todolist.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.hateoas.core.Relation;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Relation("user")
 public class User extends AbstractEntity {
 
     @Column(unique = true)

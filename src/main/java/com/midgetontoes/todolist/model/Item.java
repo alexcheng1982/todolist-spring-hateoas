@@ -1,6 +1,7 @@
 package com.midgetontoes.todolist.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.hateoas.core.Relation;
 
 import javax.persistence.Entity;
 import javax.persistence.Lob;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 @Entity
+@Relation("item")
 public class Item extends AbstractEntity {
 
     @Lob

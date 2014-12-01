@@ -14,12 +14,15 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.hateoas.config.EnableHypermediaSupport;
+import org.springframework.hateoas.config.EnableHypermediaSupport.HypermediaType;
 
 import java.util.Arrays;
 
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
+@EnableHypermediaSupport(type= {HypermediaType.HAL})
 public class Application {
 
     @Bean

@@ -1,6 +1,7 @@
 package com.midgetontoes.todolist.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.hateoas.core.Relation;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Relation("list")
 public class List extends AbstractEntity {
     private String name;
 
