@@ -2,6 +2,7 @@ package com.midgetontoes.todolist.resource;
 
 
 import com.midgetontoes.todolist.controller.ItemRestController;
+import com.midgetontoes.todolist.controller.ListRestController;
 import com.midgetontoes.todolist.model.Item;
 import org.springframework.hateoas.ResourceSupport;
 
@@ -14,13 +15,13 @@ public class ItemResource extends ResourceSupport {
         this.item = item;
         Long itemId = item.getId();
         Long listId = item.getList().getId();
-        add(linkTo(methodOn(ItemRestController.class, listId, itemId).readItem(listId, itemId)).withSelfRel());
         if (item.isCompleted()) {
-            add(linkTo(methodOn(ItemRestController.class, listId, itemId).markAsUncompleted(listId, itemId)).withRel("mark-as-uncompleted"));
+            add(linkTo(methodOn(ItemRestController.class).markAsUncompleted(listId, itemId)).withRel("mark-as-uncompleted"));
         }
         else {
-            add(linkTo(methodOn(ItemRestController.class, listId, itemId).markAsCompleted(listId, itemId)).withRel("mark-as-completed"));
+            add(linkTo(methodOn(ItemRestController.class).markAsCompleted(listId, itemId)).withRel("mark-as-completed"));
         }
+        add(linkTo(methodOn(ListRestController.class).readList(listId)).withRel("collection"));
     }
 
     public Item getItem() {

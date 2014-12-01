@@ -12,7 +12,7 @@ public class ItemResourceAssembler extends ResourceAssemblerSupport<Item, ItemRe
 
     @Override
     public ItemResource toResource(Item item) {
-        return createResourceWithId(item.getId(), item);
+        return createResourceWithId(item.getId(), item, item.getList().getId());
     }
 
     @Override

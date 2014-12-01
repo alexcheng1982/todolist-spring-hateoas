@@ -3,6 +3,7 @@ package com.midgetontoes.todolist.controller;
 import com.midgetontoes.todolist.jpa.ItemRepository;
 import com.midgetontoes.todolist.model.Item;
 import com.midgetontoes.todolist.resource.ItemResource;
+import com.midgetontoes.todolist.resource.ItemResourceAssembler;
 import com.midgetontoes.todolist.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resources;
@@ -25,24 +26,22 @@ public class ItemRestController {
     @RequestMapping(method = RequestMethod.GET)
     public Resources<ItemResource> readItems(@PathVariable Long listId) {
         return new Resources<ItemResource>(
-                itemService.findByListId(listId)
-                    .stream()
-                    .map(ItemResource::new)
-                    .collect(Collectors.toList()));
+                new ItemResourceAssembler().toResources(itemService.findByListId(listId))
+        );
     }
 
     @RequestMapping(value = "/{itemId}", method = RequestMethod.GET)
     public ItemResource readItem(@PathVariable Long listId, @PathVariable Long itemId) {
-        return new ItemResource(itemService.findOne(itemId));
+        return new ItemResourceAssembler().toResource(itemService.findOne(itemId));
     }
 
     @RequestMapping(value = "/{itemId}/markAsCompleted", method = RequestMethod.PUT)
     public ItemResource markAsCompleted(@PathVariable Long listId, @PathVariable Long itemId) {
-        return new ItemResource(itemService.markAsCompleted(itemId));
+        return new ItemResourceAssembler().toResource(itemService.markAsCompleted(itemId));
     }
 
     @RequestMapping(value = "/{itemId}/markAsUncompleted", method = RequestMethod.PUT)
     public ItemResource markAsUncompleted(@PathVariable Long listId, @PathVariable Long itemId) {
-        return new ItemResource(itemService.markAsUncompleted(itemId));
+        return new ItemResourceAssembler().toResource(itemService.markAsUncompleted(itemId));
     }
 }

@@ -13,7 +13,7 @@ public class ListResource extends ResourceSupport {
     public ListResource(List list) {
         this.list = list;
         Long listId = list.getId();
-        add(linkTo(methodOn(ItemRestController.class, listId).readItems(listId)).withRel("items"));
+        add(linkTo(methodOn(ItemRestController.class).readItems(listId)).withRel("items"));
     }
 
     public List getList() {
