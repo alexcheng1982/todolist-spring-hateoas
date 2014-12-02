@@ -6,6 +6,7 @@ import com.midgetontoes.todolist.resource.ListResourceAssembler;
 import com.midgetontoes.todolist.service.ListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.ExposesResourceFor;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resources;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 @RestController
 @ExposesResourceFor(List.class)
@@ -25,7 +28,8 @@ public class ListRestController {
     @RequestMapping(method = RequestMethod.GET)
     public Resources<ListResource> readLists(Principal principal) {
         String username = principal.getName();
-        return new Resources<ListResource>(new ListResourceAssembler().toResources(listService.findByUserUsername(username)));
+        Link link = linkTo(ListRestController.class).withSelfRel();
+        return new Resources<ListResource>(new ListResourceAssembler().toResources(listService.findByUserUsername(username)), link);
     }
 
     @RequestMapping(value = "/{listId}", method = RequestMethod.GET)

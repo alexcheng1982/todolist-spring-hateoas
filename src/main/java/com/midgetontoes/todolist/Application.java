@@ -14,8 +14,11 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.hateoas.UriTemplate;
 import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.hateoas.config.EnableHypermediaSupport.HypermediaType;
+import org.springframework.hateoas.hal.CurieProvider;
+import org.springframework.hateoas.hal.DefaultCurieProvider;
 
 import java.util.Arrays;
 
@@ -33,6 +36,12 @@ public class Application {
                     List list =  listRepository.save(new List("Default", user));
                     itemRepository.save(new Item("My first item.", list));
                 });
+    }
+
+    @Bean
+    public CurieProvider curieProvider() {
+        return new DefaultCurieProvider("todo",
+                new UriTemplate("http://www.midgetontoes.com/todolist/{#rel}"));
     }
 
     public static void main(String[] args) {

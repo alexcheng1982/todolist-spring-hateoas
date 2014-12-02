@@ -9,15 +9,14 @@ import com.midgetontoes.todolist.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.hateoas.ExposesResourceFor;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resources;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-import java.util.Collection;
-import java.util.stream.Collectors;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 @RestController
 @ExposesResourceFor(Item.class)
@@ -32,8 +31,10 @@ public class ItemRestController {
 
     @RequestMapping(method = RequestMethod.GET)
     public Resources<ItemResource> readItems(@PathVariable Long listId) {
+        Link link = linkTo(ItemRestController.class, listId).withSelfRel();
         return new Resources<ItemResource>(
-                new ItemResourceAssembler().toResources(itemService.findByListId(listId))
+                new ItemResourceAssembler().toResources(itemService.findByListId(listId)),
+                link
         );
     }
 
