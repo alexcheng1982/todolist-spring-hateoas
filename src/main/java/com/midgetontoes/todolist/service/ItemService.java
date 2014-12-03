@@ -25,7 +25,7 @@ public class ItemService {
         Item item = itemRepository.findOne(id);
         if (item != null) {
             item.markAsCompleted();
-            itemRepository.save(item);
+            save(item);
         }
         return item;
     }
@@ -34,8 +34,12 @@ public class ItemService {
         Item item = itemRepository.findOne(id);
         if (item != null) {
             item.markAsUncompleted();
-            itemRepository.save(item);
+            save(item);
         }
         return item;
+    }
+
+    public Item save(Item item) {
+        return itemRepository.save(item);
     }
 }

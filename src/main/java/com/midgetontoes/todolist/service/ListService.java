@@ -19,4 +19,8 @@ public class ListService {
     public Collection<List> findByUserUsername(String username) {
         return listRepository.findByUserUsername(username);
     }
+
+    public List save(List list) {
+        return listRepository.save(list);
+    }
 }

@@ -31,6 +31,10 @@ public class List extends AbstractEntity {
         this.user = user;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
