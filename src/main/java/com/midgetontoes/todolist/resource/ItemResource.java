@@ -4,13 +4,14 @@ package com.midgetontoes.todolist.resource;
 import com.midgetontoes.todolist.controller.ItemRestController;
 import com.midgetontoes.todolist.controller.ListRestController;
 import com.midgetontoes.todolist.model.Item;
-import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.Resource;
 
 import java.time.LocalDateTime;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
-public class ItemResource extends ResourceSupport {
+public class ItemResource extends Resource {
 
     private final String description;
 
@@ -21,6 +22,7 @@ public class ItemResource extends ResourceSupport {
     private final LocalDateTime completedAt;
 
     public ItemResource(Item item) {
+        super(item);
         this.description = item.getDescription();
         this.priority = item.getPriority();
         this.completed = item.isCompleted();

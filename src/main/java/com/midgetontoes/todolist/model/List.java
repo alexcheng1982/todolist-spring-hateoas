@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Relation("list")
+@Relation(value = "list", collectionRelation = "lists")
 public class List extends AbstractEntity {
     private String name;
 

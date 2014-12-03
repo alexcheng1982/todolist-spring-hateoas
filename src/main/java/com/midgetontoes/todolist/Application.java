@@ -1,10 +1,8 @@
 package com.midgetontoes.todolist;
 
-import com.fasterxml.jackson.databind.Module;
 import com.midgetontoes.todolist.jpa.ItemRepository;
 import com.midgetontoes.todolist.jpa.ListRepository;
 import com.midgetontoes.todolist.jpa.UserRepository;
-import com.midgetontoes.todolist.json.JacksonModule;
 import com.midgetontoes.todolist.model.Item;
 import com.midgetontoes.todolist.model.List;
 import com.midgetontoes.todolist.model.User;
@@ -41,7 +39,7 @@ public class Application {
     @Bean
     public CurieProvider curieProvider() {
         return new DefaultCurieProvider("todo",
-                new UriTemplate("http://www.midgetontoes.com/todolist/{#rel}"));
+                new UriTemplate("http://www.midgetontoes.com/todolist/rels/{rel}"));
     }
 
     public static void main(String[] args) {

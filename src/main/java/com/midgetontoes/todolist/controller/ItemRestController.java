@@ -1,8 +1,6 @@
 package com.midgetontoes.todolist.controller;
 
-import com.midgetontoes.todolist.jpa.ItemRepository;
 import com.midgetontoes.todolist.model.Item;
-import com.midgetontoes.todolist.model.List;
 import com.midgetontoes.todolist.resource.ItemResource;
 import com.midgetontoes.todolist.resource.ItemResourceAssembler;
 import com.midgetontoes.todolist.service.ItemService;
@@ -16,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 @RestController
 @ExposesResourceFor(Item.class)

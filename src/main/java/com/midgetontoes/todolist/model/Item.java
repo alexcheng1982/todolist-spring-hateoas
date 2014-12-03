@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 @Entity
-@Relation("item")
+@Relation(value = "item", collectionRelation = "items")
 public class Item extends AbstractEntity {
 
     @Lob
