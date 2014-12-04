@@ -67,4 +67,10 @@ public class ListRestController {
         list = listService.save(list);
         return new ListResourceAssembler().toResource(list);
     }
+
+    @RequestMapping(value = "/{listId}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteList(@PathVariable Long listId) {
+        listService.delete(listId);
+        return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+    }
 }

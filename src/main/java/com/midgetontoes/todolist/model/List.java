@@ -19,7 +19,7 @@ public class List extends AbstractEntity {
     @JsonIgnore
     private User user;
 
-    @OneToMany(mappedBy = "list", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "list", fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonIgnore
     private Set<Item> items = new HashSet<>();
 

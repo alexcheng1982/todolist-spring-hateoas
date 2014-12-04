@@ -23,4 +23,8 @@ public class ListService {
     public List save(List list) {
         return listRepository.save(list);
     }
+
+    public void delete(Long id) {
+        listRepository.delete(id);
+    }
 }

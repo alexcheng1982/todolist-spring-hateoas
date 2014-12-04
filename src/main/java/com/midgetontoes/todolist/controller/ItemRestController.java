@@ -67,4 +67,10 @@ public class ItemRestController {
         responseHeaders.setLocation(linkTo(methodOn(ItemRestController.class).readItem(listId, item.getId())).toUri());
         return new ResponseEntity<Object>(responseHeaders, HttpStatus.CREATED);
     }
+
+    @RequestMapping(value = "/{itemId}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteItem(@PathVariable Long listId, @PathVariable Long itemId) {
+        itemService.delete(itemId);
+        return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+    }
 }
