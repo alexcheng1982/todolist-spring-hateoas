@@ -17,6 +17,9 @@ import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.hateoas.config.EnableHypermediaSupport.HypermediaType;
 import org.springframework.hateoas.hal.CurieProvider;
 import org.springframework.hateoas.hal.DefaultCurieProvider;
+import org.springframework.http.MediaType;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.Arrays;
 
@@ -40,6 +43,24 @@ public class Application {
     public CurieProvider curieProvider() {
         return new DefaultCurieProvider("todo",
                 new UriTemplate("http://www.midgetontoes.com/todolist/rels/{rel}"));
+    }
+
+    @Bean
+    public WebConfig webConfig() {
+        return new WebConfig();
+    }
+
+    private static class WebConfig extends WebMvcConfigurerAdapter {
+        @Override
+        public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+            configurer.favorPathExtension(true)
+                    .favorParameter(false)
+                    .ignoreAcceptHeader(false)
+                    .useJaf(false)
+                    .defaultContentType(MediaType.TEXT_HTML)
+                    .mediaType("json", MediaType.APPLICATION_JSON)
+                    .mediaType("html", MediaType.TEXT_HTML);
+        }
     }
 
     public static void main(String[] args) {

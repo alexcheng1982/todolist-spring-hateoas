@@ -26,7 +26,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 @RestController
 @ExposesResourceFor(List.class)
-@RequestMapping("/lists")
+@RequestMapping(value = "/lists", produces = {"application/json"})
 public class ListRestController {
 
     @Autowired
@@ -50,7 +50,7 @@ public class ListRestController {
         return new ListResourceAssembler().toResource(listService.findOne(listId));
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, consumes = {"application/json"})
     public ResponseEntity<?> createList(Principal principal, @RequestBody CreateListCommand createListCommand) {
         User user = userService.findByUsername(principal.getName()).orElseThrow(AccessDeniedException::new);
         List list = new List(createListCommand.getName(), user);
@@ -60,7 +60,7 @@ public class ListRestController {
         return new ResponseEntity<Object>(responseHeaders, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{listId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{listId}", method = RequestMethod.PUT, consumes = {"application/json"})
     public ListResource updateList(@PathVariable Long listId, @RequestBody UpdateListCommand updateListCommand) {
         List list = listService.findOne(listId);
         list.setName(updateListCommand.getName());

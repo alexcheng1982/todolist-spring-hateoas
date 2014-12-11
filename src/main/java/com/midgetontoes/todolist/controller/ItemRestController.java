@@ -22,7 +22,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
 @ExposesResourceFor(Item.class)
-@RequestMapping(value = "/lists/{listId}/items")
+@RequestMapping(value = "/lists/{listId}/items", produces = {"application/json"})
 public class ItemRestController {
 
     @Autowired
@@ -58,7 +58,7 @@ public class ItemRestController {
         return new ItemResourceAssembler().toResource(itemService.markAsUncompleted(itemId));
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, consumes = {"application/json"})
     public ResponseEntity<?> createItem(@PathVariable Long listId, @RequestBody CreateItemCommand createItemCommand) {
         List list = listService.findOne(listId);
         Item item = new Item(createItemCommand.getDescription(), createItemCommand.getPriority(), list);
