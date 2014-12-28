@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
-public class ItemResource extends Resource {
+public class ItemResource extends Resource<Item> {
 
     private final String description;
 

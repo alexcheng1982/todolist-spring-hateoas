@@ -20,6 +20,7 @@ import org.springframework.hateoas.hal.DefaultCurieProvider;
 import org.springframework.http.MediaType;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.Arrays;
 
@@ -42,7 +43,7 @@ public class Application {
     @Bean
     public CurieProvider curieProvider() {
         return new DefaultCurieProvider("todo",
-                new UriTemplate("http://www.midgetontoes.com/todolist/rels/{rel}"));
+                new UriTemplate("http://localhost:8080/rels/{rel}"));
     }
 
     @Bean

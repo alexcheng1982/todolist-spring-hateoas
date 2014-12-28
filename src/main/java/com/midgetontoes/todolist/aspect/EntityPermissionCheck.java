@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Aspect
-public class EntityPermissionCheck {
+public final class EntityPermissionCheck {
 
     @Autowired
     private ListRepository listRepository;

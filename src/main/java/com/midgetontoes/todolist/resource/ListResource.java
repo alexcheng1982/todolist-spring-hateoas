@@ -7,7 +7,7 @@ import org.springframework.hateoas.Resource;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
-public class ListResource extends Resource {
+public class ListResource extends Resource<List> {
 
     private final String name;
 

@@ -47,7 +47,7 @@ public class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdap
                     .authorizeRequests()
                     .antMatchers("/").permitAll()
                     .antMatchers("/login").permitAll()
-                    .anyRequest().hasRole("USER")
+                    .antMatchers("/**").hasRole("USER")
                     .and()
                     .httpBasic().realmName("To-do list").and()
                     .formLogin().loginPage("/login").failureUrl("/login?error").and()
